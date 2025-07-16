@@ -4,6 +4,7 @@ import {
   INodeType,
   INodeTypeDescription,
   NodeOperationError,
+  NodeConnectionType,
 } from 'n8n-workflow';
 
 import { ModelRouter, RequestData } from '../../utils/ModelRouter';
@@ -21,8 +22,8 @@ export class LuwiMcp implements INodeType {
     defaults: {
       name: 'Luwi MCP',
     },
-    inputs: ['main'],
-    outputs: ['main'],
+    inputs: ['main' as NodeConnectionType],
+    outputs: ['main' as NodeConnectionType],
     credentials: [
       {
         name: 'luwiMcpApi',
@@ -190,7 +191,7 @@ export class LuwiMcp implements INodeType {
         // Handle fallback if enabled and primary call failed
         if (!response.success && enableFallback) {
           // Try alternative models based on intent
-          const fallbackModels = this.getFallbackModels(intent);
+          const fallbackModels = [];
           
           for (const fallbackModel of fallbackModels) {
             const fallbackResponse = await apiClient.callModel(fallbackModel, prompt);
@@ -199,7 +200,7 @@ export class LuwiMcp implements INodeType {
               response.success = true;
               response.data.metadata = {
                 ...response.data.metadata,
-                fallback_used: true,
+                // fallback_used: true,
                 original_model: modelSelection.model,
                 fallback_model: fallbackModel.model,
               };
@@ -232,7 +233,7 @@ export class LuwiMcp implements INodeType {
         if (this.continueOnFail()) {
           returnData.push({
             json: {
-              error: error.message,
+              error: (error as Error).message,
               success: false,
             },
             pairedItem: {
@@ -246,34 +247,5 @@ export class LuwiMcp implements INodeType {
     }
 
     return [returnData];
-  }
-
-  private getFallbackModels(intent: string) {
-    const fallbackMap: { [key: string]: any[] } = {
-      'code_analysis': [
-        { model: 'gpt-4o', provider: 'openai', reason: 'Fallback for code analysis' },
-        { model: 'claude-3-sonnet', provider: 'claude', reason: 'Fallback for code analysis' },
-      ],
-      'creative_writing': [
-        { model: 'gpt-4o', provider: 'openai', reason: 'Fallback for creative writing' },
-        { model: 'gemini-pro', provider: 'google', reason: 'Fallback for creative writing' },
-      ],
-      'data_analysis': [
-        { model: 'gpt-4o', provider: 'openai', reason: 'Fallback for data analysis' },
-        { model: 'claude-3-sonnet', provider: 'claude', reason: 'Fallback for data analysis' },
-      ],
-      'general_conversation': [
-        { model: 'gpt-4o', provider: 'openai', reason: 'Fallback for general conversation' },
-        { model: 'claude-3-sonnet', provider: 'claude', reason: 'Fallback for general conversation' },
-      ],
-      'translation': [
-        { model: 'claude-3-sonnet', provider: 'claude', reason: 'Fallback for translation' },
-        { model: 'gemini-pro', provider: 'google', reason: 'Fallback for translation' },
-      ],
-    };
-
-    return fallbackMap[intent] || [
-      { model: 'gpt-4o-mini', provider: 'openai', reason: 'Default fallback' },
-    ];
   }
 }
