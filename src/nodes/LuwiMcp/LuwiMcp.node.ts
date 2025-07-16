@@ -14,7 +14,7 @@ export class LuwiMcp implements INodeType {
   description: INodeTypeDescription = {
     displayName: 'Luwi MCP',
     name: 'luwiMcp',
-    icon: 'file:luwi-mcp.svg',
+    icon: 'file:luwi-icon.svg',
     group: ['transform'],
     version: 1,
     subtitle: '={{$parameter["operation"]}}',
