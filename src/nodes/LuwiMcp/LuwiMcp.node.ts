@@ -38,13 +38,13 @@ export class LuwiMcp implements INodeType {
         noDataExpression: true,
         options: [
           {
-            name: 'Generate',
+            name: '✨ Generate',
             value: 'generate',
             description: 'Generate content using optimal AI model',
             action: 'Generate content',
           },
           {
-            name: 'Analyze',
+            name: '🔍 Analyze',
             value: 'analyze',
             description: 'Analyze content using optimal AI model',
             action: 'Analyze content',
@@ -70,27 +70,27 @@ export class LuwiMcp implements INodeType {
         type: 'options',
         options: [
           {
-            name: 'Code Analysis',
+            name: '💻 Code Analysis',
             value: 'code_analysis',
             description: 'Code review, debugging, optimization',
           },
           {
-            name: 'Creative Writing',
+            name: '✏️ Creative Writing',
             value: 'creative_writing',
             description: 'Creative content, storytelling, copywriting',
           },
           {
-            name: 'Data Analysis',
+            name: '📊 Data Analysis',
             value: 'data_analysis',
             description: 'Data processing, analysis, insights',
           },
           {
-            name: 'General Conversation',
+            name: '💬 General Conversation',
             value: 'general_conversation',
             description: 'General questions and conversations',
           },
           {
-            name: 'Translation',
+            name: '🌍 Translation',
             value: 'translation',
             description: 'Language translation tasks',
           },
@@ -104,17 +104,17 @@ export class LuwiMcp implements INodeType {
         type: 'options',
         options: [
           {
-            name: 'Low',
+            name: '🔋 Low',
             value: 'low',
             description: 'Simple, straightforward tasks',
           },
           {
-            name: 'Medium',
+            name: '🔋🔋 Medium',
             value: 'medium',
             description: 'Moderate complexity tasks',
           },
           {
-            name: 'High',
+            name: '🔋🔋🔋 High',
             value: 'high',
             description: 'Complex, detailed tasks',
           },
