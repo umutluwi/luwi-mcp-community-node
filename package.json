@@ -1,0 +1,56 @@
+{
+  "name": "@luwi/n8n-nodes-mcp",
+  "version": "0.1.0",
+  "description": "Luwi MCP Community Node for n8n - MVP Version",
+  "keywords": [
+    "n8n-community-node-package",
+    "mcp",
+    "model-context-protocol",
+    "ai",
+    "automation",
+    "workflow"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/umutluwi/luwi-mcp-community-node",
+  "author": {
+    "name": "Luwi Community",
+    "email": "community@luwi.org"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/umutluwi/luwi-mcp-community-node.git"
+  },
+  "main": "index.js",
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc --watch",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "files": [
+    "dist"
+  ],
+  "n8n": {
+    "n8nNodesApiVersion": 1,
+    "credentials": [
+      "dist/credentials/LuwiMcpApi.credentials.js"
+    ],
+    "nodes": [
+      "dist/nodes/LuwiMcp/LuwiMcp.node.js"
+    ]
+  },
+  "devDependencies": {
+    "@types/node": "^20.8.0",
+    "typescript": "^5.2.2"
+  },
+  "dependencies": {
+    "n8n-workflow": "^1.0.0",
+    "axios": "^1.5.0"
+  },
+  "peerDependencies": {
+    "n8n-workflow": "*"
+  },
+  "engines": {
+    "node": ">=18.0.0",
+    "npm": ">=8.0.0"
+  }
+}
