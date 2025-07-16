@@ -7,7 +7,7 @@ import {
   NodeConnectionType,
 } from 'n8n-workflow';
 
-import { ModelRouter, RequestData } from '../../utils/ModelRouter';
+import { ModelRouter, RequestData, ModelSelection } from '../../utils/ModelRouter';
 import { ApiClient } from '../../utils/ApiClient';
 
 export class LuwiMcp implements INodeType {
@@ -191,7 +191,7 @@ export class LuwiMcp implements INodeType {
         // Handle fallback if enabled and primary call failed
         if (!response.success && enableFallback) {
           // Try alternative models based on intent
-          const fallbackModels: string[] = [];
+          const fallbackModels: ModelSelection[] = [];
           
           for (const fallbackModel of fallbackModels) {
             const fallbackResponse = await apiClient.callModel(fallbackModel, prompt);
@@ -202,7 +202,7 @@ export class LuwiMcp implements INodeType {
                 ...response.data.metadata,
                 // fallback_used: true,
                 // original_model: modelSelection.model,
-                fallback_model: fallbackModel.model,
+                // fallback_model: fallbackModel.model,
               };
               break;
             }
