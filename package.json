@@ -27,7 +27,8 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "files": [
-    "dist"
+    "dist",
+    "resources"
   ],
   "n8n": {
     "n8nNodesApiVersion": 1,
